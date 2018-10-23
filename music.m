@@ -1,3 +1,5 @@
+% Simple Demo that needs lots of cleaning up, lots of adding things to get
+% a good grade, and lots of automation.
 c = 440*(2^((40-49)/12));
 g = 440*(2^((47-49)/12));
 a = 440;
