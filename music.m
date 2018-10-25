@@ -77,7 +77,7 @@ for i = 1:numvoices
         for k=1:length(horn)
             note = note + (sin(2*pi*freq*k*t) * horn(k));
         end
-        note = dynamic*note*0.1;
+        note = dynamic*note*0.05;
         arraylen = samplingrate*dur;
         envelope = [linspace(0,1,.02*samplingrate) linspace(1,.8,.02*samplingrate) linspace(.8,.7,arraylen-(.08*samplingrate)) linspace(.7,0,.04*samplingrate)];
         note = note .* envelope;
@@ -90,11 +90,17 @@ for i = 1:numvoices
     if isempty(fin)
         fin = zeros(1,length(song));
     end
-    if i == 1
-        fin = fin + song;
+    if length(fin) ~= length(song)
+        if length(fin) - length(song) > 0
+            song = [song zeros(1, length(fin) - length(song))];
+        else
+            fin = [fin zeros(1, length(song) - length(fin))];
+        end
     end
+    fin = fin + song;
     song = [];
     tline = fgetl(fid);
 end
 plot(fin)
-audiowrite('music.wav',fin,samplingrate)
+sound(fin, samplingrate)
+%audiowrite('music.wav',fin,samplingrate)
