@@ -31,20 +31,20 @@ for i = 1:numvoices
         num = double(cell2mat(sp(1)));
         note = char(num(1));
         if note == 'p'
-            dynamic = .5;
+            dynamic = .1;
             tline = fgetl(fid);
             continue
         elseif note == 'f'
-            dynamic = 7;
+            dynamic = 5;
             tline = fgetl(fid);
             continue
         elseif note == 'm'
             if char(num(2)) == 'p'
-                dynamic = 1;
+                dynamic = .6;
                 tline = fgetl(fid);
                 continue
             elseif char(num(2)) == 'f'
-                dynamic = 3;
+                dynamic = 2;
                 tline = fgetl(fid);
                 continue
             end
