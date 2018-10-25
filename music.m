@@ -11,14 +11,14 @@ guitar = [1, 0.68, 1.26, 0.13, 0.13, 0.11, 0.01, 0.02, 0.2];
 oboe = [1, 0.98, 2.1, 0.19, 0.2, 0.23, 0.61, 0.3, 0.2];
 horn = [1, 0.39, 0.23, 0.22, 0.07, 0.05, 0.07, 0.05, 0.04, 0.03];
 
-instrument = piano;
+instrument = horn;
 
 %% Set other data
 samplingrate = 44100; % 44.1 kHz
 dynamic = 1;
 
 %% Read in music File and Build Sinusoids
-fid = fopen('music.txt');
+fid = fopen('bach.txt');
 tline = fgetl(fid);
 tempo = str2double(tline); % bpm
 tline = fgetl(fid);
