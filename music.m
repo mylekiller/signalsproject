@@ -11,6 +11,8 @@ guitar = [1, 0.68, 1.26, 0.13, 0.13, 0.11, 0.01, 0.02, 0.2];
 oboe = [1, 0.98, 2.1, 0.19, 0.2, 0.23, 0.61, 0.3, 0.2];
 horn = [1, 0.39, 0.23, 0.22, 0.07, 0.05, 0.07, 0.05, 0.04, 0.03];
 
+instrument = piano;
+
 %% Set other data
 samplingrate = 44100; % 44.1 kHz
 dynamic = 1;
@@ -74,12 +76,13 @@ for i = 1:numvoices
         t = linspace(time, dur+time-.001, samplingrate*dur);
         z = 1;
         note = zeros(1, length(t));
-        for k=1:length(horn)
-            note = note + (sin(2*pi*freq*k*t) * horn(k));
+        for k=1:length(instrument)
+            note = note + (sin(2*pi*freq*k*t) * instrument(k));
         end
         note = dynamic*note*0.05;
         arraylen = samplingrate*dur;
-        envelope = [linspace(0,1,.02*samplingrate) linspace(1,.8,.02*samplingrate) linspace(.8,.7,arraylen-(.08*samplingrate)) linspace(.7,0,.04*samplingrate)];
+        envelope = [linspace(0,1,.02*samplingrate) linspace(1,.8,.02*samplingrate) ...
+            linspace(.8,.7,arraylen-(.08*samplingrate)) linspace(.7,0,.04*samplingrate)];
         note = note .* envelope;
         song = [song note];
         time = time + dur;
