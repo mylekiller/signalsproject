@@ -83,5 +83,5 @@ for i = 1:numvoices
     song = [];
     tline = fgetl(fid);
 end
-plot(song)
-sound(song,samplingrate)
+plot(fin)
+audiowrite('music.wav',fin,samplingrate)
