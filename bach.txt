@@ -1,6 +1,6 @@
 100
 2
-horn
+organ
 mp
 F# 4 1 //Soprano
 B  4 1
