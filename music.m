@@ -14,12 +14,14 @@ instrumentset = {'piano', 'organ', 'flute', 'guitar', 'oboe', 'horn'};
 ivalueset = {piano, organ, flute, guitar, oboe, horn};
 instruments = containers.Map(instrumentset, ivalueset, 'UniformValues',false);
 
+instrument = horn;
+
 %% Set other data
 samplingrate = 44100; % 44.1 kHz
 dynamic = 1;
 
 %% Read in music File and Build Sinusoids
-fid = fopen('music.txt');
+fid = fopen('bach.txt');
 tline = fgetl(fid);
 tempo = str2double(tline); % bpm
 tline = fgetl(fid);
@@ -84,7 +86,8 @@ for i = 1:numvoices
         end
         note = dynamic*note*0.05;
         arraylen = samplingrate*dur;
-        envelope = [linspace(0,1,.02*samplingrate) linspace(1,.8,.02*samplingrate) linspace(.8,.7,arraylen-(.08*samplingrate)) linspace(.7,0,.04*samplingrate)];
+        envelope = [linspace(0,1,.02*samplingrate) linspace(1,.8,.02*samplingrate) ...
+            linspace(.8,.7,arraylen-(.08*samplingrate)) linspace(.7,0,.04*samplingrate)];
         note = note .* envelope;
         song = [song note];
         time = time + dur;
