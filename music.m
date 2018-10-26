@@ -10,6 +10,9 @@ flute = [1, 9, 3.8, 1.8, 0.4, 0.2];
 guitar = [1, 0.68, 1.26, 0.13, 0.13, 0.11, 0.01, 0.02, 0.2];
 oboe = [1, 0.98, 2.1, 0.19, 0.2, 0.23, 0.61, 0.3, 0.2];
 horn = [1, 0.39, 0.23, 0.22, 0.07, 0.05, 0.07, 0.05, 0.04, 0.03];
+instrumentset = {'piano', 'organ', 'flute', 'guitar', 'oboe', 'horn'};
+ivalueset = {piano, organ, flute, guitar, oboe, horn};
+instruments = containers.Map(instrumentset, ivalueset, 'UniformValues',false);
 
 %% Set other data
 samplingrate = 44100; % 44.1 kHz
@@ -20,7 +23,9 @@ fid = fopen('music.txt');
 tline = fgetl(fid);
 tempo = str2double(tline); % bpm
 tline = fgetl(fid);
-numvoices = str2double(tline);
+numvoices = str2double(tline); % number of voices in the music
+tline = fgetl(fid);
+instrument = instruments(tline); % Type of instrument
 tline = fgetl(fid);
 sharp = false;
 flat = false;
@@ -74,8 +79,8 @@ for i = 1:numvoices
         t = linspace(time, dur+time-.001, samplingrate*dur);
         z = 1;
         note = zeros(1, length(t));
-        for k=1:length(horn)
-            note = note + (sin(2*pi*freq*k*t) * horn(k));
+        for k=1:length(instrument)
+            note = note + (sin(2*pi*freq*k*t) * instrument(k));
         end
         note = dynamic*note*0.05;
         arraylen = samplingrate*dur;
