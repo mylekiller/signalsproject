@@ -14,8 +14,6 @@ instrumentset = {'piano', 'organ', 'flute', 'guitar', 'oboe', 'horn'};
 ivalueset = {piano, organ, flute, guitar, oboe, horn};
 instruments = containers.Map(instrumentset, ivalueset, 'UniformValues',false);
 
-instrument = horn;
-
 %% Set other data
 samplingrate = 44100; % 44.1 kHz
 dynamic = 1;
@@ -110,5 +108,4 @@ for i = 1:numvoices
     tline = fgetl(fid);
 end
 plot(fin)
-sound(fin, samplingrate)
-%audiowrite('music.wav',fin,samplingrate)
+audiowrite('music.wav',fin,samplingrate)
